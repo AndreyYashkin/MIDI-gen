@@ -2,7 +2,7 @@ import torch.nn as nn
 
 
 class SimpleMidiRNN(nn.Module):
-  def __init__(self,  input_size, hidden_size, num_layers, bidirectional, rnn_class = nn.GRU, notes_num = None, nan_class = False):
+  def __init__(self,  seq_length, input_size, hidden_size, num_layers, bidirectional, rnn_class = nn.GRU, notes_num = None, nan_class = False):
     super(SimpleMidiRNN, self).__init__()
     if not notes_num:
       notes_num = input_size
@@ -42,7 +42,7 @@ class ConvMidiRNN(nn.Module):
         nn.ReLU(inplace=True)
     )
     # 128  is a number of features in the hidden state
-    self.rnn = SimpleMidiRNN(128, seq_length, 2, True, notes_num = notes_num, nan_class = nan_class)
+    self.rnn = SimpleMidiRNN(seq_length, 128, seq_length, 2, True, notes_num = notes_num, nan_class = nan_class)
 
 
   def forward(self, x):
