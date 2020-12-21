@@ -1,21 +1,21 @@
 import pretty_midi
 import numpy as np 
-from fastai.vision.all import * # for IntToFloatTensor only
+#from fastai.vision.all import * # for IntToFloatTensor only
 
 
 def generate_piano_roll(model, seq_length, start_piano_roll, timesteps, thresh = 0.5, remove_nan = False):
-  piano_roll = IntToFloatTensor()(ToTensor()(start_piano_roll))
+  piano_roll = (ToTensor()(start_piano_roll))).float()/255
   for i in range(timesteps):
     out = model(piano_roll[None, :, :, -seq_length:]).sigmoid() > thresh
     out = out.unsqueeze(2).byte()
     if remove_nan:
       out = out[:,1:, ]
     piano_roll = torch.cat([piano_roll, out], dim = 2)
-  return piano_roll
+  return piano_roll[0]
 
 
 def generate_rand_piano_roll(model, seq_length, start_piano_roll, timesteps, thresh_r = 0, remove_nan = False):
-  piano_roll = IntToFloatTensor()(ToTensor()(start_piano_roll))
+  piano_roll = (ToTensor()(start_piano_roll))).float()/255
   for i in range(timesteps):
     out = model(piano_roll[None, :, :, -seq_length:]).sigmoid()
     r = torch.rand(out.shape)
@@ -24,7 +24,7 @@ def generate_rand_piano_roll(model, seq_length, start_piano_roll, timesteps, thr
     if remove_nan:
       out = out[:,1:, ]
     piano_roll = torch.cat([piano_roll, out], dim = 2)
-  return piano_roll
+  return piano_roll[0]
 
 
 # from https://github.com/craffel/pretty-midi/blob/master/examples/reverse_pianoroll.py
