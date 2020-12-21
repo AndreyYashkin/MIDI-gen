@@ -29,7 +29,7 @@ class SimpleMidiRNN(nn.Module):
 
 
 class ConvMidiRNN(nn.Module):
-  def __init__(self, notes_num, nan_class = False):
+  def __init__(self, seq_length, notes_num, nan_class = False):
     super(ConvMidiRNN, self).__init__()
     self.conv = nn.Sequential(
         # (bs, 1, notes_num, midi_length)
