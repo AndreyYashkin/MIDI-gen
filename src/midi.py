@@ -1,5 +1,6 @@
 import pretty_midi
 import numpy as np 
+from fastai.vision.all import * # for IntToFloatTensor only
 
 
 def generate_piano_roll(model, seq_length, start_piano_roll, timesteps, thresh = 0.5, remove_nan = False):
