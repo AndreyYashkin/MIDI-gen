@@ -13,8 +13,8 @@ class SimpleMidiRNN(nn.Module):
     self.fc = nn.Sequential(
         nn.Flatten(),
         nn.Dropout(),
-        nn.BatchNorm1d(hidden_size * 2 if bidirectional else seq_length),
-        nn.Linear(hidden_size * 2 if bidirectional else seq_length, out_size)
+        nn.BatchNorm1d(hidden_size * 2 if bidirectional else hidden_size),
+        nn.Linear(hidden_size * 2 if bidirectional else hidden_size, out_size)
     )
   
 
