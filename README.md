@@ -6,8 +6,7 @@ The project is written on Pytorch with FastAI. For evaluation purposes only Pyto
 I used several different metrics to evaluate a quality of my models. You can see their values in my notebooks.
 
 To gerate new MIDI files you need to pass as arguments *gan.py* a beggining part of your MIDI from *data*,
-a path where you want to save output and a time length which you want to append to the beggining.
+a path where you want to save output and a time length which you want to append to the beggining. Like
 
-'''
-python3 gan.py data/
-'''
+'python3 gan.py data/name.pmg midi/name.midi 100'
+
